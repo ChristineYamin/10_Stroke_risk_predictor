@@ -3,7 +3,7 @@ import joblib
 import pandas as pd
 
 # 1. Load the model
-model = joblib.load('../model/stroke_model.pkl')
+model = joblib.load('C:/Projects/10_Stroke_risk_prediction/model/stroke_model.pkl')
 
 st.title("🧠 Stroke Risk Prediction System")
 st.write("This app predicts the likelihood of a stroke based on health metrics.")
