@@ -1,0 +1,55 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Model Sanity Check
+        run: |
+          python -c "
+          import joblib;
+          import pandas as pd;
+          
+          # Test the serialized model
+          model = joblib.load('model/stroke_model.pkl');
+          
+          sample_patient = pd.DataFrame({
+              'age': [80],
+              'hypertension': [1],
+              'heart_disease': [1],
+              'avg_glucose_level': [250.0],
+              'bmi': [35.0],
+              'gender_Male': [0],
+              'gender_Other': [0],
+              'ever_married_Yes': [1],
+              'work_type_Never_worked': [0],
+              'work_type_Private': [1],
+              'work_type_Self-employed': [0],
+              'work_type_children': [0],
+              'Residence_type_Urban': [1],
+              'smoking_status_formerly smoked': [0],
+              'smoking_status_never smoked': [0],
+              'smoking_status_smokes': [1]
+          });
+          
+          prob = model.predict_proba(sample_patient)[:, 1][0];
+          print(f'Sanity Check Passed with Risk Probability: {prob:.2f}');
+          assert prob >= 0.18, 'Model failed to flag high-risk case.';
+          "
