@@ -1,10 +1,14 @@
 import streamlit as st
 import joblib
 import pandas as pd
+import os
 
 # 1. Load the model
-model = joblib.load('C:/Projects/10_Stroke_risk_prediction/model/stroke_model.pkl')
+# Get the directory where app.py is located
+base_path = os.path.dirname(__file__)
+model_path = os.path.join(base_path, 'model', 'stroke_model.pkl')
 
+model = joblib.load(model_path)
 st.title("🧠 Stroke Risk Prediction System")
 st.write("This app predicts the likelihood of a stroke based on health metrics.")
 
