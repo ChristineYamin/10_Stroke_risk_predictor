@@ -50,6 +50,4 @@ In stroke prediction, a False Negative (failing to identify a patient at risk) i
 
 
  ## Live Demo
-
-
-
+https://10strokeriskpredictor-iwrrbcuqnrmsgwo4zhr6sh.streamlit.app/
