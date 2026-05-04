@@ -52,7 +52,7 @@ except Exception as e:
 # Application Header
 st.title("🩺 Stroke Risk Prediction System")
 st.markdown("""
-    An interactive MLOps application built to assist with cardiovascular risk assessment using machine learning.
+   This application predicts the likelihood of a stroke using a machine learning model optimized for high recall. 
 """)
 st.write("---")
 
@@ -60,7 +60,7 @@ st.write("---")
 col1, col2 = st.columns(2)
 
 with col1:
-    st.subheader("👤 Demographics & Lifestyle")
+    st.subheader("Demographics & Lifestyle")
     age = st.number_input("Age", min_value=1, max_value=100, value=55, step=1)
     avg_glucose_level = st.number_input("Average Glucose Level (mg/dL)", min_value=50.0, max_value=300.0, value=120.5)
     bmi = st.number_input("BMI", min_value=10.0, max_value=60.0, value=28.4)
@@ -70,7 +70,7 @@ with col1:
     )
 
 with col2:
-    st.subheader("🏥 Medical History")
+    st.subheader("Medical History")
     hypertension = st.selectbox("Hypertension", ["No", "Yes"])
     heart_disease = st.selectbox("Heart Disease", ["No", "Yes"])
     gender = st.selectbox("Gender", ["Female", "Male", "Other"])
